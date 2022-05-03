@@ -1,0 +1,35 @@
+if not listexists hitPoints
+    createlist hitPoints
+    pushlist hitPoints '100'
+    pushlist hitPoints '99'
+    pushlist hitPoints '98'
+    pushlist hitPoints '97'
+    pushlist hitPoints '96'
+    pushlist hitPoints '95'
+    pushlist hitPoints '94'
+    pushlist hitPoints '93'
+    pushlist hitPoints '92'
+    pushlist hitPoints '91'
+    pushlist hitPoints '90'
+    pushlist hitPoints '89'
+    pushlist hitPoints '88'
+endif
+
+setvar oldMax 100
+
+while not dead
+    if maxhits != oldMax
+        for 13
+            if atlist hitPoints 0 as x
+                if x == maxhits
+                    setvar oldMax x    
+                    overhead "MaxHits Changed"
+                    overhead x
+                    #DO STUFF HERE ON STAT CHANGE
+                endif
+                pushlist hitPoints x
+                poplist hitPoints 'front'
+            endif
+        endfor
+    endif
+endwhile
