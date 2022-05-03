@@ -1,0 +1,27 @@
+removelist controller
+createlist controller
+
+if not timerexists '_eleCastTimer'
+    createtimer  '_eleCastTimer'
+    settimer '_eleCastTimer' 99999
+endif
+
+overhead '- CONTROLLER -' 55
+# LETS FIND SOME WORK
+pushlist controller 'FakeJob_1'
+if followers < 2 
+    overhead 'Adding work: Summon_1' 22
+    pushlist controller 'Summon_1'
+    pushlist controller 'Controller-'
+    script 'Worker-'
+elseif timer '_summonElemental' > 30000 and followers < 3 and followers != 4
+    overhead 'Adding work: Summon_2' 22
+    pushlist controller 'Summon_2'
+    pushlist controller 'Controller-'
+    script 'Worker-'
+endif
+
+pushlist controller 'FakeJob_2'
+pushlist controller 'FakeJob_3'
+
+loop

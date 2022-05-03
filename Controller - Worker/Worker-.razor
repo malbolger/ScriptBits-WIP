@@ -1,0 +1,91 @@
+overhead '-WORKER-' 55
+#Create WORKER specific list
+removelist 'workerList'
+createlist 'workerList'
+
+if not timerexists  '_eleCastTimer'
+    createtimer '_eleCastTimer'
+    settimer '_eleCastTimer'
+endif
+
+#CHECK OUR WORKLOAD
+#overhead "Queued Work:" 33
+foreach task in controller
+    #overhead task 36
+endfor
+#overhead "End Queue" 33
+
+#Transfer Items from generic controller list to worker specific
+#should use worker specific from this point on.
+foreach item in controller
+    if 'Summon_' in item
+        pushlist workerList item
+        poplist controller item
+    endif
+endfor
+
+#LETS DO WORK
+#overhead "Doing Work:" 99
+while list workerList > 0
+    foreach item in workerList
+        if item == "Summon_1"
+            #overhead "Job : Summon_1" 92
+        if counttype 'Blood Moss' 'backpack' > 10 and counttype 'Black Pearl%s%' 'backpack' > 10 and counttype 'Mandrake Root%s%' 'backpack' > 10 and counttype "Spider's Silk" 'backpack' > 10                            
+                     if mana > 55
+                        #timer is only to stop sysmsg SPAM
+                        if timer '_eleCastTimer' > 7000
+                            hotkey "Water Elemental"
+                            settimer '_eleCastTimer' 0
+                        endif
+                    else            
+                        #overhead "not enough mana"
+                    endif                    
+                else
+                    #overhead "not enough regs"    
+                endif
+            #overhead "We are popping: Summon_1" 95
+            poplist workerList 'Summon_1'
+            if followers == 2
+                settimer '_summonElemental' 0
+            endif
+        elseif item == 'Summon_2'
+            #overhead "Job: Summon_2" 92
+             if counttype 'Blood Moss' 'backpack' > 10 and counttype 'Black Pearl%s%' 'backpack' > 10 and counttype 'Mandrake Root%s%' 'backpack' > 10 and counttype "Spider's Silk" 'backpack' > 10                            
+                 if mana > 55
+                    #timer only to stop sysmsg SPAM
+                    if timer '_eleCastTimer' > 7000
+                        hotkey "Water Elemental"
+                        settimer '_eleCastTimer' 0
+                    endif
+                else            
+                    #overhead "not enough mana"
+                endif                    
+            else
+                #overhead "not enough regs"    
+            endif
+            #overhead "We are popping: Summon_2" 95
+            poplist workerList 'Summon_2'
+            if followers == 4
+                settimer '_summonElemental' 0
+            endif
+        endif
+    endfor
+endwhile
+#overhead 'End of work' 99
+
+#CHECK WORKLOAD AGAIN TO PROVE THIS PORTION OF LIST IS HANDLED
+#overhead "Queued Work: "
+foreach task in workerList
+    #overhead task
+endfor
+#overhead "End Queue"
+
+#WE ARE DONE
+#Find the Script to return to in the generic list
+#Go to Caller
+#overhead "Calling script" 55
+foreach caller in controller
+    if '-' in caller
+        script caller
+    endif
+endfor
