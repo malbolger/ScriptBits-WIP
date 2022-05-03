@@ -1,0 +1,13 @@
+if not listexists 'animals'
+    createlist 'animals'
+    pushlist 'animals' '0x204'
+endif
+
+while not dead 
+    foreach animal in animals
+        if findtype animal 'ground' any any 2 as found
+            attack found
+            break
+        endif
+    endfor
+endwhile
