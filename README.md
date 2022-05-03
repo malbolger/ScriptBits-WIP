@@ -1,2 +1,2 @@
 # ScriptBits-WIP
-Chunks of useful scripts that are useful.
+Chunks of scripts that are useful.
