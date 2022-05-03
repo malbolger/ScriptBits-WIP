@@ -1,0 +1,16 @@
+if skill 'tracking' > 0
+    clearsysmsg 
+    gumpclose 4267467659
+    while not insysmsg 'What do you wish to track' or insysmsg 'you must wait a few moments' 
+        skill 'Tracking'
+        wait 50
+    endwhile
+    waitforgump 4267467659
+    gumpresponse 6 4267467659
+    waitforgump 4267467659
+    if not insysmsg 'You will receive'
+        gumpresponse 6 4267467659
+        waitforgump 4267467659
+    endif
+    gumpclose 4267467659
+endif
