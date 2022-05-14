@@ -1,0 +1,15 @@
+//Alpharious
+// Toggle Off and Stop Handler
+if listexists 'ToggleOff'
+    overhead '[STOPPED]' 69
+    removelist 'ToggleOff'
+    removelist 'ScriptOn'
+    stop
+endif
+// Makes script toggleable.
+if not listexists 'ScriptOn'
+    createlist 'ScriptOn'
+else
+    createlist 'ToggleOff'
+    replay
+endif
