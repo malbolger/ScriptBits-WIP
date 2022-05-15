@@ -1,3 +1,4 @@
+//Alpharious
 if skill 'tracking' > 0
     clearsysmsg 
     gumpclose 4267467659
