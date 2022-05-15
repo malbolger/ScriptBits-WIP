@@ -1,0 +1,10 @@
+//Alpharious
+removelist breakCheck
+createlist breakCheck
+foreach element in someList
+  pushlist breakCheck 1
+  # Do work...
+  if list someList = list breakCheck
+    break
+  endif
+endfor
